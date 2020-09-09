@@ -4,25 +4,51 @@ author: "Soyeon Lee"
 date: "9/9/2020"
 output: html_document
 ---
-```{r}
-library(dplyr)
-library(ggplot2)
-
-gapminder_data<-read.table("open_data/gapminder.csv",sep=",", header=TRUE)
-```
 
 Problems
 
 1. Use R to demonstrate that the mean minimizes the sum of the squared deviations from the mean. Accomplish the following steps:
-  a. Produce a sample of at least 10 or more different numbers
-  b. Produce a simulation following the example from the concepts        section
-  c. Use your simulation to test a range of numbers smaller and          larger than the mean to show that the mean minimizes the sum of      the squared deviations from the mean.
-  d. Plot your results.
+
+(Independence level: 75/100) 
 ```{r}
+# a. Produce a sample of at least 10 or more different numbers
+# assign numbers from 1 through 15 into the a vector
+# verify the content
 scores<-1:15
+scores
+```
+```{r}
+# b. Produce a simulation following the example from the concepts section
+# get the mean of scores
+# subtract mean from each of the scores to get deviations
+# add all the deviations 
+mean(scores)
+scores-mean(scores)
+sum(scores-mean(scores))
+```
+```{r}
+# c. Use your simulation to test a range of numbers smaller and          larger than the mean to show that the mean minimizes the sum of      the squared deviations from the mean.
+the_mean<-mean(scores)
+numbers_to_test<-min(scores):max(scores)
+
+sum_deviations<-c()
+for(i in numbers_to_test){
+  sum_deviations[i]<-sum(scores-i)
+}
+sum_deviations
+the_mean==which(sum_deviations==0)
+```
+```{r}
+# d. Plot your results.
+plot(abs(sum_deviations))
 ```
 
 2. Write a custom R function for any one of the following descriptive statistics: median, mode, standard deviation, variance. Demonstrate that it produces the same value as the base R function given some set of numbers.
+```{r}
+variance<-functions()
+```
+
+
 
 3. Imagine the same instructor taught a morning, afternoon, and evening section of the same course. And, the average scores for each section on a midterm were 85% for the morning, 90% for the afternoon, and 93% for the evening sections. Create a data.frame representing these means for each section. Then, use ggplot2 to plot the means as bar graph. (hint you will need one vector for the class sections, and one vector for the means. Then you can combine them into a data.frame before plotting them)
 
