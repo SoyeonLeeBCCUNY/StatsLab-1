@@ -28,6 +28,12 @@ sum(scores-mean(scores))
 ```
 ```{r}
 # c. Use your simulation to test a range of numbers smaller and          larger than the mean to show that the mean minimizes the sum of      the squared deviations from the mean.
+#assign the mean of scores to the_mean
+#assign all the numbers to numbers_to_test
+#set sum_deviations as a null vector to initiate loop
+#at each loop, a deviation of each number from the approx.mean are calculated and added as a sum, which is then assigned to each position in sum_deviations
+#display sum_deviations
+#verify that the_mean is the number that results in sum_deviations=0 when it is suggested as the mean
 the_mean<-mean(scores)
 numbers_to_test<-min(scores):max(scores)
 
@@ -40,15 +46,25 @@ the_mean==which(sum_deviations==0)
 ```
 ```{r}
 # d. Plot your results.
+#transform negatives values as positive to make an easy display of the 0 sum_deviations 
 plot(abs(sum_deviations))
 ```
 
 2. Write a custom R function for any one of the following descriptive statistics: median, mode, standard deviation, variance. Demonstrate that it produces the same value as the base R function given some set of numbers.
 ```{r}
-variance<-functions()
+#name function of scores as variance
+#calculate the sum of squared deviations
+#calculate the number of numbers for an estimate of population
+#verify that the function produces the correct answer 
+
+variance<-function(scores){
+  ss<-sum((scores-mean(scores))^2)
+  n<-length(scores)-1
+  return(ss/n)
+}
+variance(1:5)
+var(1:5)
 ```
-
-
 
 3. Imagine the same instructor taught a morning, afternoon, and evening section of the same course. And, the average scores for each section on a midterm were 85% for the morning, 90% for the afternoon, and 93% for the evening sections. Create a data.frame representing these means for each section. Then, use ggplot2 to plot the means as bar graph. (hint you will need one vector for the class sections, and one vector for the means. Then you can combine them into a data.frame before plotting them)
 
