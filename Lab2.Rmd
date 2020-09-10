@@ -72,6 +72,9 @@ var(1:5)
 
 Independence level: 80/100
 ```{r}
+#create sections and grades
+#create a new data frame and call it grades_by_section
+#plot with x and y variables from the data frame, choose a theme, and include labels and a title
 sections<-c("morning","afternoon","evening")
 grades<-c(85,90,93)
 grades_by_section<-data.frame(sections,grades)
@@ -83,8 +86,6 @@ ggplot(grades_by_section,aes(x=sections,y=grades))+
   theme_classic()+
   ggtitle("Grades by Section")
 ```
-
-
 
 4. Imagine there were two instructors, and they each taught different sections in the morning, afternoon and evening. The midterm averages for instructor 1 were 75%, 78%, and 80% in the morning, afternoon, and evening. The midterm averages for instructor 2 were 88%, 76%, and 63% for the morning, afternoon, and evening. Create a data.frame representing the means, the time of day, and the instructors (three columns). Then plot data.frame using ggplot2 as a bar graph.
 
