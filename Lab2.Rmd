@@ -9,7 +9,7 @@ Problems
 
 1. Use R to demonstrate that the mean minimizes the sum of the squared deviations from the mean. Accomplish the following steps:
 
-(Independence level: 75/100) 
+(Independence level: 80/100) 
 ```{r}
 # a. Produce a sample of at least 10 or more different numbers
 # assign numbers from 1 through 15 into the a vector
@@ -51,6 +51,8 @@ plot(abs(sum_deviations))
 ```
 
 2. Write a custom R function for any one of the following descriptive statistics: median, mode, standard deviation, variance. Demonstrate that it produces the same value as the base R function given some set of numbers.
+
+(Independence level: 100/100)
 ```{r}
 #name function of scores as variance
 #calculate the sum of squared deviations
@@ -67,6 +69,22 @@ var(1:5)
 ```
 
 3. Imagine the same instructor taught a morning, afternoon, and evening section of the same course. And, the average scores for each section on a midterm were 85% for the morning, 90% for the afternoon, and 93% for the evening sections. Create a data.frame representing these means for each section. Then, use ggplot2 to plot the means as bar graph. (hint you will need one vector for the class sections, and one vector for the means. Then you can combine them into a data.frame before plotting them)
+
+Independence level: 80/100
+```{r}
+sections<-c("morning","afternoon","evening")
+grades<-c(85,90,93)
+grades_by_section<-data.frame(sections,grades)
+
+ggplot(grades_by_section,aes(x=sections,y=grades))+
+  geom_bar(stat="identity")+
+  xlab("Sections")+
+  ylab("Grades")+
+  theme_classic()+
+  ggtitle("Grades by Section")
+```
+
+
 
 4. Imagine there were two instructors, and they each taught different sections in the morning, afternoon and evening. The midterm averages for instructor 1 were 75%, 78%, and 80% in the morning, afternoon, and evening. The midterm averages for instructor 2 were 88%, 76%, and 63% for the morning, afternoon, and evening. Create a data.frame representing the means, the time of day, and the instructors (three columns). Then plot data.frame using ggplot2 as a bar graph.
 
