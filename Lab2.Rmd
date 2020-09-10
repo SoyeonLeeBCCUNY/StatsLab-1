@@ -133,14 +133,28 @@ ggplot(group_means,aes(x=year,y=mean_LifeExp))+geom_bar(stat="identity")
 
 6. Repeat the above, except in addition to calculating the mean for each year, also calculate the standard deviation for “healthy life expectancy at birth” for each year. Then, add error bars to your graph using the +1 and -1 standard deviations from the means for each year.
 ```{r}
+#create group_means subset data and group_by year
+#filter out NA entries for Healthy.life.expectancy.at.birth, and only keep those from years 2010-2015
+#summarize the mean and the standard deviation
+#create a table
+#create a bar graph, label x and y variables, and add in the error bars to show 1 standard deviation around the mean
 
+group_means<-world_happiness%>%
+  group_by(year)%>%
+  filter(!is.na(Healthy.life.expectancy.at.birth),year>=2010,year<=2015)%>%
+  summarize(mean_LifExp=mean(Healthy.life.expectancy.at.birth),sd_LifExp=sd(Healthy.life.expectancy.at.birth))
+
+knitr::kable(group_means)
+
+ggplot(group_means,aes(x=year,y=mean_LifExp))+
+  geom_col()+
+    ylab("Mean Life Expectancy")+
+    xlab("Year")+
+  geom_errorbar(aes(ymin=mean_LifExp-sd_LifExp,
+                    ymax=mean_LifExp+sd_LifExp),width=.25)
 ```
 
-
-
 Advanced
-
-This problem is not officially assigned for points. I’m placing it here for your consideration.
 
 The mean minimizes the sum of the squared deviations. The median minimizes the sum of the absolute deviations. Demonstrate these properties by simulation in R.
 
