@@ -91,6 +91,11 @@ ggplot(grades_by_section,aes(x=sections,y=grades))+
 
 Independence level: 50/100
 ```{r}
+#assign six items to instructor, sections, and grades
+#create a data frame called instructor_data
+#create a plot for the data, set x and y, and color the bars
+#make two sets of graphs with three bars for each instructor and add labels
+
 instructor<-c("one","one","one","two","two","two")
 sections<-c("morning","afternoon","evening","morning","afternoon","evening")
 grades<-c(75,78,80,88,76,63)
@@ -106,12 +111,32 @@ ggplot(instructor_data, aes(x=sections,y=grades,group=instructor,fill=instructor
   ggtitle("class Grades by Instructor")
 ```
 
-
-
-
 5. Import the WHR2018.csv data file, containing measure from the World Happiness report from 2018. For the years 2010 to 2015, what was the mean “healthy life expectancy at birth” for each year (find the mean for each year across countries). Show your results in a table and in a graph using ggplot.
+  Independence level: 40/100
+```{r}
+#load the data and name it
+#create a subset data called group_means
+#filter out all years except 2010-2015
+#summarize mean life expectancy by year across all countries, while removing the entry that has no information
+
+world_happiness<-read.table("open_data/WHR2018.csv",sep=",",header=TRUE)
+
+group_means<-world_happiness%>%
+  filter(year>=2010,year<=2015)%>%
+  group_by(year)%>%
+  summarize(mean_LifeExp=mean(Healthy.life.expectancy.at.birth, na.rm=TRUE))
+  
+knitr::kable(group_means)
+
+ggplot(group_means,aes(x=year,y=mean_LifeExp))+geom_bar(stat="identity")
+```
 
 6. Repeat the above, except in addition to calculating the mean for each year, also calculate the standard deviation for “healthy life expectancy at birth” for each year. Then, add error bars to your graph using the +1 and -1 standard deviations from the means for each year.
+```{r}
+
+```
+
+
 
 Advanced
 
