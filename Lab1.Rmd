@@ -2,7 +2,9 @@
 title: "Lab1"
 author: "Soyeon Lee"
 date: "8/31/2020"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 1. Compute the sum of the sequence 100 to 1000, going up by a constant value of 100 (100,200,300,400,500,600,700,800,900,1000).
@@ -59,7 +61,7 @@ seq_gen(1,10)
 ```
  
 4. Write a custom function to implement the following general equation to find the sum of any constant series:
-X1+X2+…+Xn=(Xn−X1c+1)(X1+Xn2)
+Gauss formula (#deleted the formula because the m-dash character and three dots tried to mess me up)
 Demonstrate that your function correctly produces the sum for the series below:
 seq(10,100,10)
 #>  [1]  10  20  30  40  50  60  70  80  90 100
