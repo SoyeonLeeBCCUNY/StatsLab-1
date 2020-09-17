@@ -4,7 +4,9 @@ author: "Soyeon Lee"
 date: "9/16/2020"
 output: html_document
 ---
-
+```{r setup,cache=F}
+knitr::opts_chunk$set(error=TRUE)
+```
 1. Create five samples of 25 observations from a normal distribution with mean 200, and standard deviation 100. Compute the mean of each sample, and plot the means in a graph using ggplot2. (1 point) Confidence: 40
 ```{r}
 ##confidence: 20
@@ -112,7 +114,7 @@ for(i in 1:length(n)){
 #organize results in data frame with a modification to plot two lines in one graph
 sim_data<-data.frame(n,                   
                     estimate=c(sample_sd,sample_sd_n),
-                   formula=c(rep("N",5),rep("N-1",5)))
+                   formula=c(rep("N-1",5),rep("N",5)))
 
 #plot two lines which is now possible
 ggplot(sim_data,aes(x=n,y=estimate,group=formula,
