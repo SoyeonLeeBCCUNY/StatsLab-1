@@ -96,3 +96,31 @@ a) Use the same normal distribution and samples sizes from above
 b) Rather than computing the mean for each sample, compute both forms of the standard deviation formula, including the sample standard deviation that divides by N-1, and the regular standard deviation that divides by N
 c) You should have 10,000 samples for each sample size, and 10,000 standard deviations for each the sample and regular standard deviation. Your task is to find the average of each, for each sample-size.
 d) Which of the standard deviations is more systematically biased? That is, which one is systematically worse at estimating the population standard deviation?
+```{r}
+##confidence:80
+
+#initialize variables
+n<-c(2,5,10,50,100)
+sample_sd<-c()
+sample_sd_n<-c()
+
+#run simulation
+for(i in 1:length(n)){
+  sim_sample<-rnorm(n[i]*10000,mean=10,sd=5)
+  sample_sd[i]<-sd(sim_sample)
+  sample_sd_n[i]<-sqrt(var(sim_sample)*(n[i]-1)/n[i])
+}
+
+#organize results in data frame with a modification to plot two lines in one graph
+sim_data<-data.frame(n,                   
+                    estimate=c(sample_sd,sample_sd_n),
+                   formula=c(rep("N",5),rep("N-1",5)))
+
+#plot two lines which is now possible
+ggplot(sim_data,aes(x=n,y=estimate,group=formula,
+                    color=formula))+
+  geom_point()+
+  geom_line()+
+  coord_cartesian(ylim=c(3,6))
+```
+
