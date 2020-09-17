@@ -81,11 +81,8 @@ for(i in 1:length(n)){
 #organize results in data frame
 sim_data<-data.frame(n,
                      mean_sample_mean)
-#plot means
-ggplot(sim_data,aes(x=n,y=mean_sample_mean))+
-  geom_bar(stat="identity")+
-  xlab("Sample Size")+
-  ylab("Mean of Sample Means")
+#print table
+knitr::kable(sim_data)
 ```
 
 4. Use a monte carlo simulation to compare the standard deviation formulas (divide by N vs N-1), and show that the N-1 formula is a better unbiased estimate of the population standard deviation, especially for small n. (2 points)
