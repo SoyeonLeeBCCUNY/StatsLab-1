@@ -33,7 +33,7 @@ ggplot(means,aes(x=samples,y=sample_mean))+
 
 2. Additionally calculate the standard deviation of each sample from above. Use the standard deviations for error bars, and produce another graph with the means along with error bars using ggplot2. (1 point)
 ```{r}
-##confidence: 80
+#confidence:80
 
 #sampling
 observations<-rnorm(5*25,mean=200,sd=100)
@@ -81,8 +81,6 @@ for(i in 1:length(n)){
 #organize results in data frame
 sim_data<-data.frame(n,
                      mean_sample_means)
-#print table
-knitr::kable(sim_data)
 
 #plot
 ggplot(sim_data,aes(x=n,y=mean_sample_means))+
