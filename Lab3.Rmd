@@ -7,20 +7,23 @@ output: html_document
 
 1. Create five samples of 25 observations from a normal distribution with mean 200, and standard deviation 100. Compute the mean of each sample, and plot the means in a graph using ggplot2. (1 point) Confidence: 40
 ```{r}
-#confidence: 20
+##confidence: 20
 
+#sampling process
 observations<-rnorm(5*25,mean=200,sd=100)
 samples<-rep(1:5,each=25)
 my_data<-data.frame(samples,observations)
 
 library(dplyr)
 
+#get means
 means<-my_data%>%
   group_by(samples)%>%
   summarize(sample_mean=mean(observations))
 
 library(ggplot2)
 
+#plot means
 ggplot(means,aes(x=samples,y=sample_mean))+
   geom_bar(stat="identity")+
   xlab("Samples")+
@@ -29,16 +32,50 @@ ggplot(means,aes(x=samples,y=sample_mean))+
 ```
 
 2. Additionally calculate the standard deviation of each sample from above. Use the standard deviations for error bars, and produce another graph with the means along with error bars using ggplot2. (1 point)
+```{r}
+##confidence: 80
+
+#sampling
+observations<-rnorm(5*25,mean=200,sd=100)
+samples<-rep(1:5,each=25)
+my_data<-data.frame(samples,observations)
+
+#get sample mean and sample sd
+means_sd<-my_data%>%
+  group_by(samples)%>%
+  summarize(sample_mean=mean(observations),
+            sample_sd=sd(observations))
+
+#plot with an error bar
+ggplot(sd,aes(x=samples,y=sample_mean))+
+  geom_bar(stat="identity")+
+  geom_errorbar(aes(ymin=sample_mean-sample_sd,
+                   ymax=sample_mean+sample_sd),
+               width=.25)
+```
+
 
 The last two problems concern the concept of using a sample to estimate a property of the population or distribution the sample came from. For example, if we know the mean of a sample, can we be confident that the population has the same mean? If we were trying to guess at the population mean, what statistics from the sample should we use?
 
 Some sample statistics are “biased”, and may systematically under or overestimate a population parameter. Others are “unbiased”, in this case the sample statistic tends to correctly estimate the population parameter over the long run.
 
 3. Demonstrate that the sample mean across a range of n, is an unbiased estimator of the population mean using a monte-carlo simulation. (2 points).
-a) The population is a normal distribution with mean = 10, standard deviation = 5.
-b) Test a variety of n (sample size), including n = 2, 5, 10, 50, and 100
-c) For each sample size n, your task is to draw 10,000 samples of that size, then for each sample, calculate the sample mean. If the mean is unbiased, then we expect that “on average” the sample means will be the same as the population mean. To determine if this is true, compute the mean of the sample means that you produce to see if it is close to the population mean.
-d) Show the mean of the sample means for each sample size.
+
+(a) The population is a normal distribution with mean = 10, standard deviation = 5.
+(b) Test a variety of n (sample size), including n = 2, 5, 10, 50, and 100
+(c) For each sample size n, your task is to draw 10,000 samples of that size, then for each sample, calculate the sample mean. If the mean is unbiased, then we expect that “on average” the sample means will be the same as the population mean. To determine if this is true, compute the mean of the sample means that you produce to see if it is close to the population mean.
+(d) Show the mean of the sample means for each sample size.
+```{r}
+##confidence: 50
+
+#initialize variables
+n<-c(2,5,10,50,100)
+sample_mean<-c()
+
+#run simulation
+for(i in 1:length(n))
+
+```
 
 4. Use a monte carlo simulation to compare the standard deviation formulas (divide by N vs N-1), and show that the N-1 formula is a better unbiased estimate of the population standard deviation, especially for small n. (2 points)
 a) Use the same normal distribution and samples sizes from above
