@@ -70,19 +70,25 @@ Some sample statistics are “biased”, and may systematically under or overest
 
 #initialize variables
 n<-c(2,5,10,50,100)
-mean_sample_mean<-c()
+mean_sample_means<-c()
 
 #run simulation
 for(i in 1:length(n)){
   sim_sample<-rnorm(n[i]*10000,mean=10,sd=5)
-  mean_sample_mean[i]<-mean(sim_sample)
+  mean_sample_means[i]<-mean(sim_sample)
 }
 
 #organize results in data frame
 sim_data<-data.frame(n,
-                     mean_sample_mean)
+                     mean_sample_means)
 #print table
 knitr::kable(sim_data)
+
+#plot
+ggplot(sim_data,aes(x=n,y=mean_sample_means))+
+  geom_bar(stat="identity")+
+  xlab("Sample size")+
+  ylab("Mean of sample means")
 ```
 
 4. Use a monte carlo simulation to compare the standard deviation formulas (divide by N vs N-1), and show that the N-1 formula is a better unbiased estimate of the population standard deviation, especially for small n. (2 points)
