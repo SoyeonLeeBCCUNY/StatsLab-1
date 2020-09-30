@@ -3,8 +3,8 @@ title: "Lab1"
 author: "Soyeon Lee"
 date: "8/31/2020"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 1. Compute the sum of the sequence 100 to 1000, going up by a constant value of 100 (100,200,300,400,500,600,700,800,900,1000).
