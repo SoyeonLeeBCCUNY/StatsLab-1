@@ -78,6 +78,9 @@ max(random_walk)
 5. What was the longest run of steps where all steps were positive numbers. For example, in the sequence: 1,2,3,2,1,0,-1,-2,-1,-2,-1,0,1,2,3; the answer is 5 because the first five values were all positive, and this was the longest sequence of positive values. (1 point).
 Confidence:0
 ```{r}
+#covert real numbers into 0,1,or -1 for simplification
+#create an empty sequence vector and set counter to 0
+#at each iteration, if the number is 0,it returns 0; if not, the logical step values are added to counter. 
 logical_step<-sign(random_walk)
 
 sequence<-c()
