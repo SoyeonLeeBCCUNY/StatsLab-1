@@ -10,8 +10,13 @@ Confidence:0
 ```{r}
 wikipedia<-"Jacob Cornelisz van Oostsanen (before 1470 – 1533) was a Northern Netherlandish painter and designer of woodcuts. This oil-on-panel painting, by his son Dirck Jacobsz., depicts Van Oostsanen painting a portrait of his wife Anna. Though Van Oostsanen had died in 1533, his wife lived until around 1550, the year in which this work was painted. Its format ingeniously incorporates the viewer in its fiction. The painter looks out, presumably at his subject, whose likeness he is depicting. The work may have been intended to serve as a memorial to Jacobsz.'s parents, to be installed above the couple's tomb in a church."
 
+  #deconstruct the words, and convert all to lower case
+  #organize them into a table to create a data frame 
+  #exclude everything but letters in letter_counts and save as final
+  #add the probabilities column to the final, and print table
 wiki_letters<-unlist(strsplit(wikipedia,split=""))
 lower_case<-tolower(wiki_letters)
+
 letter_counts<-table(lower_case)
 letter_counts<-data.frame(letter_counts)
 
@@ -28,12 +33,30 @@ final<-final%>%
 knitr::kable(final)
 ```
 2. Generate “random” strings of letters that are sampled from a distribution where letter occurrence probability is the same as natural English. Use the probabilities for each letter from this wikipedia article, or use your own estimates from the previous question (2 points).
+Confidence:50
 ```{r}
+#create a sequence and organize them in a matrix
+#paste by row the letters, to create 5 letter strings 
+my_strings<-sample(final$lower_case,50*5,replace=TRUE)
+
+random_strings<-matrix(my_strings,ncol=5)
+
+my_letters<-c()
+for(i in 1:dim(random_strings)[1]){
+  my_letters[i]<-paste(random_strings[i,],collapse = "")
+}
+my_letters
 
 ```
 
-
 3. Generate a random walk of 10,000 steps. In a random walk, you are simulating the process of randomly taking a step up or down, as if you are on an infinite staircase. At each step you flip a coin. If you get heads you go up one step, if you get tails you go down one step. Start on step 0, then simulate a random walk for 10,000 steps. Your vector should preserve the step number for each step. For example, if the the first three steps were all heads, then the vector would begin with 0,1,2,3, which indicates a single step up each time. Plot the first 1,000 steps. (1 point)
+Confidence:80
+```{r}
+each_step<-c()
+random_walk<-c()
+
+for(i)
+```
 
 4. What was the most positive and most negative step reached out of 10,000? (1 point)
 
