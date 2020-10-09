@@ -59,3 +59,15 @@ pnorm(q=12,
 5. You randomly sample 25 numbers from a normal distribution with mean = 10 and standard deviation = 20. You obtain a sample standard deviation of 15. You want to know the probability that you could have received a sample standard deviation of 15 or less.
 
 Create a sampling distribution of standard deviations for this scenario with at least 10,000 sample standard deviations. Then, calculate the proportion of sample standard deviations that are 15 or less. (1 point)
+```{r}
+sd(rnorm(25,mean=10,sd=20))
+
+samplDistrb<-replicate(10000,sd(rnorm(25,10,20)))
+hist(samplDistrb)
+pnorm(q=15,
+      mean=mean(samplDistrb),
+      sd=sd(samplDistrb),
+      lower.tail=TRUE
+      )
+```
+
