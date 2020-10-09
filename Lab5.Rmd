@@ -9,7 +9,7 @@ output: html_document
 Confidence:80
 ```{r}
 #get proportion greater than 2.5
-#verify 
+#verify this using a sampling distribution
 pnorm(q=2.5, mean=0,sd=1,lower.tail=FALSE)
 
 my_sample<-rnorm(1000000,mean=0,sd=1)
@@ -20,6 +20,8 @@ length(selection)/1000000
 2. If performance on a standardized test was known to follow a normal distribution with mean 100 and standard deviation 10, and 10,000 people took the test, how many people would be expected to achieve a score higher than 3 standard deviations from the mean? (1 point)
 Confidence:90
 ```{r}
+#standardize the normal distribution
+#get number of people who scored higher than 3 sd
 stand_scores<-scale(rnorm(n=10000,mean=100,sd=10))
 length(stand_scores[stand_scores>3])
 ```
@@ -28,6 +30,8 @@ length(stand_scores[stand_scores>3])
 Create a sampling distribution of the mean for this scenario with at least 10,000 sample means (1 point). Then, calculate the proportion of sample means that are 12 or larger (1 point).
 Confidence:90
 ```{r}
+#get sample mean with n=25
+#identify the p-value in the sampling distribution
 mean(rnorm(25,mean=10,sd=20))
 
 my_samplMeans<-replicate(10000,mean(rnorm(25,10,20)))
@@ -44,6 +48,8 @@ pnorm(q=12,
 Create a sampling distribution of the mean for this scenario with at least 10,000 sample means. Then, calculate the proportion of sample means that are 12 or larger. Is the proportion different from question 3, why? (1 point)
 Confidence:90
 ```{r}
+#get sample mean with n=100
+#identify the p-value in the sampling distribution
 mean(rnorm(100,mean=10,sd=20))
 
 my_samplMeans<-replicate(10000,mean(rnorm(25,10,20)))
@@ -60,6 +66,8 @@ pnorm(q=12,
 
 Create a sampling distribution of standard deviations for this scenario with at least 10,000 sample standard deviations. Then, calculate the proportion of sample standard deviations that are 15 or less. (1 point)
 ```{r}
+#get sd with n=25
+#identify the p-value in the sampling distribution
 sd(rnorm(25,mean=10,sd=20))
 
 samplDistrb<-replicate(10000,sd(rnorm(25,10,20)))
