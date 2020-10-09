@@ -41,7 +41,20 @@ pnorm(q=12,
  
 4. You randomly sample 100 numbers from a normal distribution with mean = 10 and standard deviation = 20. You obtain a sample mean of 12. You want to know the probability that you could have received a sample mean of 12 or larger.
 
-Create a sampling distribution of the mean for this scenario with at least 10,000 sample means. Then, calculate the proportion of sample means that are 12 or larger. Is the proportion different from question 3, why? (1 point).
+Create a sampling distribution of the mean for this scenario with at least 10,000 sample means. Then, calculate the proportion of sample means that are 12 or larger. Is the proportion different from question 3, why? (1 point)
+Confidence:90
+```{r}
+mean(rnorm(25,mean=10,sd=20))
+
+my_samplMeans<-replicate(10000,mean(rnorm(25,10,20)))
+hist(my_samplMeans)
+pnorm(q=12,
+      mean=mean(my_samplMeans),
+      sd=sd(my_samplMeans),
+      lower.tail=FALSE
+      )
+#This yields a different value of proportion because "the process of sampling from a distribution involves variability or uncertainty".
+```
 
 5. You randomly sample 25 numbers from a normal distribution with mean = 10 and standard deviation = 20. You obtain a sample standard deviation of 15. You want to know the probability that you could have received a sample standard deviation of 15 or less.
 
