@@ -53,7 +53,7 @@ pnorm(q=12,
       sd=sd(my_samplMeans),
       lower.tail=FALSE
       )
-#This yields a different value of proportion because "the process of sampling from a distribution involves variability or uncertainty".  However, reduced standard error from an increased sample size would better approximate the population mean. 
+#The proportion in #4 is lower because the scores away from the mean are less frequent than the #3 distribution.  The reduced variability and standard error in #4 are due to the increased sample size.
 ```
 
 5. You randomly sample 25 numbers from a normal distribution with mean = 10 and standard deviation = 20. You obtain a sample standard deviation of 15. You want to know the probability that you could have received a sample standard deviation of 15 or less.
