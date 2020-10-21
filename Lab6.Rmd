@@ -20,14 +20,14 @@ the_data<-read.csv("open_data/SchroederEpley2015data.csv", header=TRUE)
 library(dplyr)
 colnames(the_data)[colnames(the_data)=='CONDITION']<-'condition'
 
-a<-c(1,2,3,4,5)
-b<-c(6,7,8,9,9)
 
 randomization_test<-function(a,b, resample=100){
+#calculate actual means  
   A_mean<-mean(a)
   B_mean<-mean(b)
   mean_difference<-A_mean-B_mean
 
+#shuffle for random sampling
   all_values<-c(a,b)
   
   sample_differences <- c()
@@ -36,6 +36,14 @@ randomization_test<-function(a,b, resample=100){
     new_A_mean <- mean(resample[1:length(a)])
     new_B_mean <- mean(resample[(length(a)+1):length(all_values)])
     sample_differences[i] <- new_A_mean-new_B_mean
+  }
+
+  test_output<-list(group_A_mean=A_mean,
+                    group_B_mean=B_mean,
+                    AB_difference=mean_difference,
+                    random_samples=sample_differences)
+  
+  return(test_output)
 }
 
 #plot
@@ -43,6 +51,8 @@ qplot(mean_differences)+
   geom_histogram(color="orange")+
   geom_vline(xintercept=2, color ="red")+
   theme_classic()
-}
+
+group_1<-c(1,2,3,4,7)
+group_2<-c(6,7,3,9,8)
 ```
 
