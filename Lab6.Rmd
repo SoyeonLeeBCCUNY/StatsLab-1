@@ -1,0 +1,21 @@
+---
+title: "Lab6"
+author: "Soyeon Lee"
+date: "10/21/2020"
+output: html_document
+---
+1. Write a function that conducts a randomization test for the mean difference between two groups, and show that it works. Specifically, using your function, conduct a randomization test on the same data we used in the above example from lab. Report the results and briefly discuss what the results of the randomization tell you. (6 points). Extra: if the observed mean difference in the experiment was found to be .5, what would you have concluded from the randomization test?
+Inputs:
+
+the inputs should include a vector for group 1, and vector for group 2, and the number of permutations/re-samplings of the data to create.
+Outputs:
+
+output each group mean, and the difference between group means
+output a histogram of the sampling distribution of the possible mean differences produced by the randomization process
+output the probability or odds of obtaining the observed mean difference or larger.
+```{r}
+randomization_test<-function(x){
+  return(list(group_means,diff_grpMeans)
+}
+```
+
