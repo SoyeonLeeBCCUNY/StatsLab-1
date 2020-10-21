@@ -13,9 +13,36 @@ Outputs:
 output each group mean, and the difference between group means
 output a histogram of the sampling distribution of the possible mean differences produced by the randomization process
 output the probability or odds of obtaining the observed mean difference or larger.
+Confidence=20
 ```{r}
-randomization_test<-function(x){
-  return(list(group_means,diff_grpMeans)
+the_data<-read.csv("open_data/SchroederEpley2015data.csv", header=TRUE)
+
+library(dplyr)
+colnames(the_data)[colnames(the_data)=='CONDITION']<-'condition'
+
+a<-c(1,2,3,4,5)
+b<-c(6,7,8,9,9)
+
+randomization_test<-function(a,b, resample=100){
+  A_mean<-mean(a)
+  B_mean<-mean(b)
+  mean_difference<-A_mean-B_mean
+
+  all_values<-c(a,b)
+  
+  sample_differences <- c()
+  for(i in 1:resample){
+    resample <- sample(all_values)
+    new_A_mean <- mean(resample[1:length(a)])
+    new_B_mean <- mean(resample[(length(a)+1):length(all_values)])
+    sample_differences[i] <- new_A_mean-new_B_mean
+}
+
+#plot
+qplot(mean_differences)+
+  geom_histogram(color="orange")+
+  geom_vline(xintercept=2, color ="red")+
+  theme_classic()
 }
 ```
 
