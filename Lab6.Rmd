@@ -43,7 +43,7 @@ randomization_test<-function(A,B, resample){
     theme_classic()
   
   #Probability of obtaining the observed mean differences or larger
-  p_value <- length(sample_differences[sample_differences>=         
+  p_value <- length(sample_differences[sample_differences >=         
                                          mean_difference])/length(sample_differences)
   
   #return a list of items
@@ -56,6 +56,7 @@ randomization_test<-function(A,B, resample){
   
   return(test_output)
 }
+
 ```
 
 ```{r}
@@ -80,7 +81,7 @@ group_1<-group_1$Intellect_Rating
 ```
 
 ```{r}
-#rutn the function with these values 
+#run the function with these values 
 randomization_test(A=group_0,
                    B=group_1,
                    resample=1000)
