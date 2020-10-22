@@ -86,6 +86,10 @@ randomization_test(A=group_0,
                    B=group_1,
                    resample=1000)
 
-#
+#Discuss the result
+#According to the summary statistics, there is an observed difference between group A (the reading group) and group B (the audio group): the mean of group A was 3.648148.  The mean for group B was 5.634921.  In order to find out whether this difference is due to random chance or not, we conducted a randomization test.  In this example, I repeated sampling and took the mean differences of each sample 1000 times to arrive at a distribution.  The vertical red line, representing the actual mean difference (-1.986772), is far away from the center.  The probability of getting random differences larger than or equal to the actual difference (i.e., p_value) is .99.  If the mean difference is closer to the center, and the p_value is much smaller, the random assignment could have caused the observed difference.
+
+#Given that the red line is far out on the tails of the distribution, we are not confident that the actual difference between group A and group B occurred due to random chance.  We are likely to reject the null and understand that the delivery method of introduction makes a difference.  Employers tend to give higher intelligence ratings for those they learn about through audio-only than those they read about. 
+
 ```
 
