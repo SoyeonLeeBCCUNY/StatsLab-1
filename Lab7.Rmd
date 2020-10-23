@@ -24,7 +24,7 @@ binom.test(x=330,
            p=.5,
            alternative="greater")
 
-#With 600 questions (trials), the p-value is less than .01. Students will unlikely to score 55% or higher by guessing each question. 
+#With 600 questions (trials), the p-value is less than .01. Students will be unlikely to score 55% or higher by guessing each question. 
 ```
 
 3. A test has 5 TRUE/FALSE questions (each with one right answer) and 5 multiple choice questions with four choices each (each with only one right answer).
