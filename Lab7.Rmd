@@ -1,0 +1,11 @@
+---
+title: "Lab7"
+author: "Soyeon Lee"
+date: "10/22/2020"
+output: html_document
+---
+
+```{r}
+
+```
+
