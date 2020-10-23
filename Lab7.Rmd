@@ -15,12 +15,18 @@ test_result<-binom.test(x=30,
 
 #The test taker answered 30 questions correctly('r test_result$p.value')
 
-#The probability of getting 60% correct questions or more, is .1013.  This probability is lower than random chance but not extremely rare.  We cannot reject the possibility that the test-taker did not randomly guessed each question. Since inference strongly depends on the experiment design, however, increasing the number of trials would yield lower probability and increase the likelihood of the test result being a product of guesses. 
+#The probability of getting 60% correct questions or more, is .1013.  This probability is lower than random chance but not extremely rare.  We cannot reject the possibility that the test-taker did not randomly guessed each question. Increasing the number of trials would yield lower probability and increase the likelihood of the test result being a product of guesses since inference strongly depends on the experiment design. 
 ```
 
 2. An examiner wants to make a TRUE/FALSE test, but is still deciding how many questions they will include. They want to make sure that it would be very difficult to simply randomly guess and be able to score any higher than 55% percent. How many questions would the examiner need to use to be confident that scores of 55% or higher were not produced by chance? (2 points)
+Confidence:100
 ```{r}
+binom.test(x=330,
+           n=600,
+           p=.5,
+           alternative="greater")
 
+#With 600 questions (trials), the p-value is less than .01, which would make it unlikely that students will get 55% or higher by guessing each question. 
 ```
 
 3. A test has 5 TRUE/FALSE questions (each with one right answer) and 5 multiple choice questions with four choices each (each with only one right answer).
@@ -28,4 +34,16 @@ test_result<-binom.test(x=30,
 create a sampling distribution or probability distribution to illustrate how a random chance process could perform on this test. (1 point)
 
 What is the probability that randomly guessing on each question could allow a person to receive 75% or greater on this test? (1 point)
+Confidence: 
+```{r}
+binom.test(x=1,
+           n=5,
+           p=.5,
+           alternative="greater")
+
+binom.test(x=1,
+           n=5,
+           p=.25,
+           alternative="greater")
+```
 
