@@ -13,9 +13,7 @@ test_result<-binom.test(x=30,
            p=.5, 
            alternative="greater")
 
-#The test taker answered 30 questions correctly('r test_result$p.value')
-
-#The probability of getting 60% or more of the questions correct is .1013.  This probability is lower than random chance but not extremely rare.  Therefore, we cannot reject the possibility that the test-taker did not randomly guessed each question. Increasing the number of trials would yield lower probability and increase the likelihood of the test result being a product of guesses. 
+#The probability of getting 60% or more of the questions correct is .1013.  This probability is lower than random chance but not rare.  Thus, we cannot reject that the test-taker did not randomly guess each question. Increasing the number of trials would lower the probability and increase the likelihood that the test result is a product of guesses. 
 ```
 
 2. An examiner wants to make a TRUE/FALSE test, but is still deciding how many questions they will include. They want to make sure that it would be very difficult to simply randomly guess and be able to score any higher than 55% percent. How many questions would the examiner need to use to be confident that scores of 55% or higher were not produced by chance? (2 points)
@@ -26,7 +24,7 @@ binom.test(x=330,
            p=.5,
            alternative="greater")
 
-#With 600 questions (trials), the p-value is less than .01. It would make it unlikely that students will get 55% or higher by guessing each question. 
+#With 600 questions (trials), the p-value is less than .01. Students will unlikely to score 55% or higher by guessing each question. 
 ```
 
 3. A test has 5 TRUE/FALSE questions (each with one right answer) and 5 multiple choice questions with four choices each (each with only one right answer).
@@ -46,7 +44,7 @@ library(ggplot2)
 qplot(simulated_scores)+
   geom_histogram()
 
-#probability of producing 75% or greater on this test by guessing each question
+#probability of producing 75% or greater on this test by guessing 
 length(simulated_scores[simulated_scores>=.75])/length(simulated_scores)
 
 ```
