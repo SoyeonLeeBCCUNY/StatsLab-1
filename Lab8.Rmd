@@ -31,5 +31,44 @@ to_zscores_B(a)
 ```
 
 2. Base R does not have a function for a z-test. Write a function to accomplish a one-sample z-test. Remember, a one-sample z test is used to compare the probability of obtaining the sample mean (or larger or smaller) if it came from a known normal distribution. (2 points).
+
 -Use your z-test function to conduct a test of the following. A sample of 25 scores is taken. The mean of the sample is 50. The sample is assumed to have been taken from a normal distribution with mean 40 and standard deviation 7. Report a one-tailed z-test, examining the probability of obtaining a sample of greater than 50 in this situation. Report the results, and give a brief sentence explaining the result and the inference you make (2 points).
 Confidence:
+
+```{r}
+ztest<-function(sample_size, sample_mean, mu, sigma){
+  sampl_distr_mean<-mu
+  sampl_distr_sd<-sigma/sqrt(sample_size)
+  
+  p_value<-pnorm(sample_mean,
+                 sampl_distr_mean,
+                 sampl_distr_sd,
+                 lower.tail=FALSE)
+  
+  return(p_value)
+}
+
+ztest(sample_size =25, sample_mean=50, mu=40, sigma=7)
+```
+
+
+```{r}
+ztest<-function(sample_mean,sample_size,mu,sigma){
+  smpl_dist_mean<-mu
+  std_err<-sigma/sqrt(sample_size)
+  
+  p_value<-pnorm(sample_mean, 
+                 smpl_dist_mean, 
+                 std_err, 
+                 lower.tail=FALSE)
+  
+  return(p_value)
+}
+
+ztest(sample_mean=50,
+      sample_size = 25, 
+      mu=40, 
+      sigma=7)
+
+```
+
