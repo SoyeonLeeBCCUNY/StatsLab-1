@@ -9,7 +9,7 @@ output: html_document
 -Advanced: Have an option so that the function will convert the raw scores to z-scores in one of two ways:
 -using user provided mean and standard deviation
 -using the calculated mean and standard deviation from the raw scores
-Confidence:80
+Confidence:90
 ```{r}
 #first option
 to_zscores_A<-function(raw,mu,st_dev){
@@ -33,9 +33,10 @@ to_zscores_B(a)
 2. Base R does not have a function for a z-test. Write a function to accomplish a one-sample z-test. Remember, a one-sample z test is used to compare the probability of obtaining the sample mean (or larger or smaller) if it came from a known normal distribution. (2 points).
 
 -Use your z-test function to conduct a test of the following. A sample of 25 scores is taken. The mean of the sample is 50. The sample is assumed to have been taken from a normal distribution with mean 40 and standard deviation 7. Report a one-tailed z-test, examining the probability of obtaining a sample of greater than 50 in this situation. Report the results, and give a brief sentence explaining the result and the inference you make (2 points).
-Confidence:
+Confidence:10
 
 ```{r}
+#the ztest function returns the probability larger than the input sample_mean
 ztest<-function(sample_mean, sample_size, mu, sigma){
   sampl_distr_mean<-mu
   sampl_distr_sd<-sigma/sqrt(sample_size)
@@ -48,6 +49,34 @@ ztest<-function(sample_mean, sample_size, mu, sigma){
 }
 
 ztest(sample_mean=50, sample_size =25, mu=40, sigma=7)
+```
+```{r}
+#this function returns the probability value for a one-or two-tailed test
+
+ztest<-function(sample_mean, sample_size, mu, sigma, two_tailed=TRUE){
+  sampl_distr_mean <-mu
+  sampl_distr_sd <-sigma/sqrt(sample_size)
+  
+  abs_difference<- abs(sample_mean-mu)
+  
+  p_value<- pnorm((mu+abs_difference),
+                  sampl_distr_mean,
+                  sampl_distr_sd,
+                  lower.tail = FALSE)
+  
+  if(two_tailed==TRUE) p_value<- p_value*2
+  return(p_value)
+}
+
+#demonstrate the function
+ztest(sample_mean=50,
+      sample_size=25,
+      mu=40,
+      sigma=7,
+      two_tailed=FALSE)
+```
+```{r}
+# The result of the one-tail z-test for a sample mean of 50, the sample size of 25 is .1586553. This means that the probability of obtaining a sample mean of 50 or greater is .1586553.  When we assume that infinite samples of 25 scores were taken from a normal distribution with a mean of 40 and standard deviation of 7, the probability of their mean being 50 is not too common but still probable.    
 ```
 
 
