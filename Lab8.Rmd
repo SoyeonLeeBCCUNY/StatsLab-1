@@ -36,7 +36,7 @@ to_zscores_B(a)
 Confidence:
 
 ```{r}
-ztest<-function(sample_size, sample_mean, mu, sigma){
+ztest<-function(sample_mean, sample_size, mu, sigma){
   sampl_distr_mean<-mu
   sampl_distr_sd<-sigma/sqrt(sample_size)
   
@@ -44,11 +44,10 @@ ztest<-function(sample_size, sample_mean, mu, sigma){
                  sampl_distr_mean,
                  sampl_distr_sd,
                  lower.tail=FALSE)
-  
   return(p_value)
 }
 
-ztest(sample_size =25, sample_mean=50, mu=40, sigma=7)
+ztest(sample_mean=50, sample_size =25, mu=40, sigma=7)
 ```
 
 
