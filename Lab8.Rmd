@@ -5,12 +5,31 @@ date: "10/30/2020"
 output: html_document
 ---
 
-1. Write a function to convert a vector of raw-scores into z-scores. The function should have inputs for the vector, the mean and sd of the normal distribution, and should return a vector of zscores. (1 point). Also, demonstrate that the function works correctly (1 point). How you make the demonstration is up to you.
--Advanced: Have an option so that the function will convert the raw scores to zscores in one of two ways:
+1. Write a function to convert a vector of raw-scores into z-scores. The function should have inputs for the vector, the mean and sd of the normal distribution, and should return a vector of z-scores. (1 point). Also, demonstrate that the function works correctly (1 point). How you make the demonstration is up to you.
+-Advanced: Have an option so that the function will convert the raw scores to z-scores in one of two ways:
 -using user provided mean and standard deviation
 -using the calculated mean and standard deviation from the raw scores
+Confidence:80
+```{r}
+#first option
+to_zscores_A<-function(raw,mu,st_dev){
+  zscores<-(raw-mu)/st_dev
+  return(zscores)
+}
 
+a<-c(1,2,4,5,6)
+to_zscores_A(a,2,1)
+```
+```{r}
+#second option
+to_zscores_B<-function(raw){
+  zscores<-(raw-mean(raw))/sd(raw)
+  return(zscores)
+}
 
+to_zscores_B(a)
+```
 
 2. Base R does not have a function for a z-test. Write a function to accomplish a one-sample z-test. Remember, a one-sample z test is used to compare the probability of obtaining the sample mean (or larger or smaller) if it came from a known normal distribution. (2 points).
 -Use your z-test function to conduct a test of the following. A sample of 25 scores is taken. The mean of the sample is 50. The sample is assumed to have been taken from a normal distribution with mean 40 and standard deviation 7. Report a one-tailed z-test, examining the probability of obtaining a sample of greater than 50 in this situation. Report the results, and give a brief sentence explaining the result and the inference you make (2 points).
+Confidence:
