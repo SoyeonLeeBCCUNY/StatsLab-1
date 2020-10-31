@@ -52,23 +52,5 @@ ztest(sample_size =25, sample_mean=50, mu=40, sigma=7)
 ```
 
 
-```{r}
-ztest<-function(sample_mean,sample_size,mu,sigma){
-  smpl_dist_mean<-mu
-  std_err<-sigma/sqrt(sample_size)
-  
-  p_value<-pnorm(sample_mean, 
-                 smpl_dist_mean, 
-                 std_err, 
-                 lower.tail=FALSE)
-  
-  return(p_value)
-}
 
-ztest(sample_mean=50,
-      sample_size = 25, 
-      mu=40, 
-      sigma=7)
-
-```
 
