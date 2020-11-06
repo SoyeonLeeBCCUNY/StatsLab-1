@@ -76,7 +76,7 @@ ztest(sample_mean=50,
       two_tailed=FALSE)
 ```
 ```{r}
-# The result of the one-tail z-test for a sample mean of 50, the sample size of 25 is .1586553. This means that the probability of obtaining a sample mean of 50 or greater is .1586553.  When we assume that infinite samples of 25 scores were taken from a normal distribution with a mean of 40 and standard deviation of 7, the probability of their mean being 50 is not too common but still probable, meaning that the samples may have come from the population as assumed.  
+# The result indicates that the probability of obtaining a sample mean of 50 or greater is 4.570531e-13.  When we assume that infinite samples of 25 scores were taken from the specified normal distribution, the probability of their mean being 50 is not too common but still probable. 
 ```
 
 
