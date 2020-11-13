@@ -87,6 +87,7 @@ age_xs<-chisq.test(age_table)
 age_xs
 ```
 ```{r}
-#report re-analysis 
+#re-analysis 
+#However, in the critical test trial that followed, 16 of 21 infants (76.2%) chose the new block--a percentage significantly different from chance, according to a two-tailed binomial test, p=.026, 95% exact confidence interval (CI)=[52.83%, 91.78%], relative risk ratio=1.52.  A chi-squre test of independence indicated no significant effect of age or gendeer on infants' choices, X2 (19,N=21)=18.24, p=.506, and X2(1, N=21)=0.15, p=.696, respectively. 
 ```
 
