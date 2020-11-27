@@ -1,0 +1,42 @@
+---
+title: "Lab10"
+author: "Soyeon Lee"
+date: "11/26/2020"
+output: html_document
+---
+Your task is to obtain the data from the following paper and conduct a reproducible analysis of their results.
+Rosenbaum, D., Mama, Y., & Algom, D. (2017). Stand by Your Stroop: Standing Up Enhances Selective Attention and Cognitive Control. Psychological science, 28(12), 1864-1867.
+
+Note, the paper, the data, and an existing reproducible analysis of this data is available at https://crumplab.github.io/statisticsLab/lab-10-factorial-anova.html#important-stuff-4
+
+The re-analysis should focus only on Experiment 3. There are three main goals
+
+1. Reproduce as much of the analysis as possible using only paired-sample t-tests. Note, the authors reported a 2x2 repeated measures ANOVA, but consider how the same questions could be answered by t-tests (2 points)
+2. Reproduce a graph of the means, like shown in the paper (2 points)
+3. Present a power-curve analysis for the design. (2 points)
+
+```{r}
+library(papaja)
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+
+#load data and change the weird column name 
+all_data<-read.csv("open_data/stroop_stand.csv")
+all_data<-all_data%>% rename(congruent_stand=ï..congruent_stand)
+```
+
+```{r}
+#Stand Stroop effect using paired sample t test
+(stand_stroop<-t.test(all_data$congruent_stand,
+                      all_data$incongruent_stand,
+                      paired=TRUE))
+
+#sit Stroop effect using paired sample t test
+(sit_stroop<-t.test(all_data$incongruent_sit,
+                   all_data$congruent_sit,
+                   paired=TRUE))
+
+
+```
+
