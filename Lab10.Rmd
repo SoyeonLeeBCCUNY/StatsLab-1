@@ -36,7 +36,7 @@ all_data<-all_data%>% rename(congruent_stand=ï..congruent_stand)
 (sit_stroop<-t.test(all_data$incongruent_sit,
                    all_data$congruent_sit,
                    paired=TRUE))
-
-
 ```
-
+The stroop effects in both the sitting condition, M=118.9 ms, t(49)=16.52, p<.01, d=2.376, and the standing condition, M=95.9 ms, t(49)=14.327, p<.01, d=2.304, were highly reliable,...
+    Our reproduction analysis shows:
+The stroop effects in both the sitting condition,`r papaja::apa_print(sit_stroop)$full_result`, and the standing condition, `r papaja::apa_print(stand_stroop)$full_result`, were highly reliable,...
