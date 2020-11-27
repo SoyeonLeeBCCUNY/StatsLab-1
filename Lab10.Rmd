@@ -27,7 +27,7 @@ all_data<-all_data%>% rename(congruent_stand=ï..congruent_stand)
 ```
 
 ```{r}
-##Part 1 Confidence: 30 
+##Part 1: Reproduce the analysis (Confidence 40) 
 
 #Stand Stroop effect using paired sample t test
 (stand_stroop<-t.test(all_data$incongruent_stand,
@@ -73,14 +73,61 @@ We found that the same result using a one-sample t test, `r apa_print(interactio
 
 We found the same mean difference `r apa_print(interaction_results)$estimate` and that we found the same p-value (.004).
 ```{r}
-##Part 2 Plotting Confidence: 10
+##Part 2: Plotting (Confidence 0)
 library(tidyr)
 
 #convert current table into a long form 3 col table
 stroop_df<-all_data%>%
-  pivot_longer(cols=1:4,
-               names_to=c("Congruency", "Posture"),
-               names_sep="_",
-               values_to="RTs")
+              pivot_longer(cols=1:4,
+                           names_to=c("Congruency", "Posture"),
+                           names_sep="_",
+                           values_to="RTs")
+
+#get means and SE for each posture-congruency condition 
+overall_means<-stroop_df%>%
+                  group_by(Posture,Congruency)%>%
+                  summarise(meanRT=mean(RTs),
+                            SEMRT=(sd(RTs)/sqrt(length(RTs)))) 
+
+#Plot
+ggplot(overall_means,aes(x=Posture,
+                         y=meanRT,
+                         group=Congruency,
+                         fill=Congruency))+
+  geom_bar(stat="identity", position="dodge")+
+  theme_classic(base_size=12)+
+  ylab("Mean Reaction Time (ms)")+
+  geom_errorbar(aes(ymin=meanRT-SEMRT,
+                    ymax=meanRT+SEMRT),
+                    position=position_dodge(width=0.9),
+                    width=0.2,
+                    color="black")+
+  coord_cartesian(ylim=c(500,1000))
+```
+
+```{r}
+##Part 3: Power curve (Confidence 50)
+effect_sizes <- seq(0,1.5,.1)
+prop_significant <-c()
+
+for(i in 1:length(effect_sizes)){
+  sim_ps <- replicate(1000, t.test(replicate(50,rnorm(1, effect_sizes[i], 1)),
+                                   mu=0) $p.value)
+
+  prop_significant[i] <- length(sim_ps[sim_ps < .05])/1000
+}
+
+plot_df <- data.frame(effect_sizes,
+                      prop_significant)
+
+ggplot(plot_df, aes(x=effect_sizes,y=prop_significant))+
+  geom_line() +
+  geom_point() +
+  scale_x_continuous(breaks=seq(0,1.5,.1))+
+  scale_y_continuous(breaks=seq(0,1,.1)) +
+  ylab("Proportion Significant")
+
+
+
 ```
 
