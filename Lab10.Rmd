@@ -28,15 +28,46 @@ all_data<-all_data%>% rename(congruent_stand=ï..congruent_stand)
 
 ```{r}
 #Stand Stroop effect using paired sample t test
-(stand_stroop<-t.test(all_data$congruent_stand,
-                      all_data$incongruent_stand,
+(stand_stroop<-t.test(all_data$incongruent_stand,
+                      all_data$congruent_stand,
                       paired=TRUE))
 
 #sit Stroop effect using paired sample t test
 (sit_stroop<-t.test(all_data$incongruent_sit,
                    all_data$congruent_sit,
                    paired=TRUE))
+
+(stroop_mean_difference<-sit_stroop$estimate - stand_stroop$estimate)
 ```
-The stroop effects in both the sitting condition, M=118.9 ms, t(49)=16.52, p<.01, d=2.376, and the standing condition, M=95.9 ms, t(49)=14.327, p<.01, d=2.304, were highly reliable,...
-    Our reproduction analysis shows:
-The stroop effects in both the sitting condition,`r papaja::apa_print(sit_stroop)$full_result`, and the standing condition, `r papaja::apa_print(stand_stroop)$full_result`, were highly reliable,...
+The authors wrote:
+The Stroop effects in both the sitting condition, M=118.9 ms, t(49)=16.52, p<.01, d=2.376, and the standing condition, M=95.9 ms, t(49)=14.327, p<.01, d=2.304, were highly reliable,...
+
+Our reproduction analysis:
+The Stroop effects in both the sitting condition,`r papaja::apa_print(sit_stroop)$full_result`, and the standing condition, `r papaja::apa_print(stand_stroop)$full_result`, were highly reliable,...
+
+```{r}
+#Confidence: 20 
+#Get difference RT for each subject and store them as stand or sit_stroop scores
+stand_stroop_scores<-all_data$incongruent_stand - 
+                     all_data$congruent_stand
+sit_stroop_scores<-all_data$incongruent_sit -
+                   all_data$congruent_sit
+
+#Stroop effect comparison between sitting and standing using the paired sample t test
+(paired_results<-t.test(stand_stroop_scores,
+                        sit_stroop_scores,
+                        paired=TRUE))
+
+#stroop difference scores as a single sample
+#a single sample test for interaction of the Stroop effect and sit/stand
+stroop_differences<-sit_stroop_scores - stand_stroop_scores
+
+interaction_results<-t.test(stroop_differences)
+```
+The authors wrote:
+...but the most significant finding again was the shrinkage of the effect when participants were standing, F(1,49)=8.964, p=.004, np2=.155.
+
+Our reproduction analysis: 
+We found that the same result using a one-sample t test, `r apa_print(interaction_results)$full_result`.
+
+We found the same mean difference `r apa_print(interaction_results)$estimate` and that we found the same p-value (.004).
