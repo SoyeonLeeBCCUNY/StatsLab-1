@@ -27,6 +27,8 @@ all_data<-all_data%>% rename(congruent_stand=ï..congruent_stand)
 ```
 
 ```{r}
+##Part 1 Confidence: 30 
+
 #Stand Stroop effect using paired sample t test
 (stand_stroop<-t.test(all_data$incongruent_stand,
                       all_data$congruent_stand,
@@ -46,23 +48,22 @@ Our reproduction analysis:
 The Stroop effects in both the sitting condition,`r papaja::apa_print(sit_stroop)$full_result`, and the standing condition, `r papaja::apa_print(stand_stroop)$full_result`, were highly reliable,...
 
 ```{r}
-#Confidence: 20 
 #Get difference RT for each subject and store them as stand or sit_stroop scores
 stand_stroop_scores<-all_data$incongruent_stand - 
                      all_data$congruent_stand
 sit_stroop_scores<-all_data$incongruent_sit -
                    all_data$congruent_sit
 
+#stroop difference scores using a single sample test
+#a single sample test for interaction of the Stroop effect and sit/stand
+stroop_differences<-sit_stroop_scores - stand_stroop_scores
+
+(interaction_results<-t.test(stroop_differences))
+
 #Stroop effect comparison between sitting and standing using the paired sample t test
 (paired_results<-t.test(stand_stroop_scores,
                         sit_stroop_scores,
                         paired=TRUE))
-
-#stroop difference scores as a single sample
-#a single sample test for interaction of the Stroop effect and sit/stand
-stroop_differences<-sit_stroop_scores - stand_stroop_scores
-
-interaction_results<-t.test(stroop_differences)
 ```
 The authors wrote:
 ...but the most significant finding again was the shrinkage of the effect when participants were standing, F(1,49)=8.964, p=.004, np2=.155.
@@ -71,3 +72,15 @@ Our reproduction analysis:
 We found that the same result using a one-sample t test, `r apa_print(interaction_results)$full_result`.
 
 We found the same mean difference `r apa_print(interaction_results)$estimate` and that we found the same p-value (.004).
+```{r}
+##Part 2 Plotting Confidence: 10
+library(tidyr)
+
+#convert current table into a long form 3 col table
+stroop_df<-all_data%>%
+  pivot_longer(cols=1:4,
+               names_to=c("Congruency", "Posture"),
+               names_sep="_",
+               values_to="RTs")
+```
+
