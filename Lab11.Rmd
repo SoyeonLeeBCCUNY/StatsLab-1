@@ -27,7 +27,12 @@ length(sim_rs[sim_rs <= results$estimate])/1000
 
 A. the smallest possible sum of cross-products (1 point)
 ```{r}
-
+sim_sums <- replicate(1000,sum(sample(1:10)*sample(1:10)))
+min(sim_sums)
 ```
 
 B. the largest possible sum of cross-products (1 point)
+```{r}
+max(sim_sums)
+```
+
