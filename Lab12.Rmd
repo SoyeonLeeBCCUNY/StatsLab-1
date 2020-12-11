@@ -1,0 +1,19 @@
+---
+title: "Lab12"
+author: "Soyeon Lee"
+date: "12/11/2020"
+output: html_document
+---
+1. Should you do a linear regression on this data? Explain.
+Y <- c(10,9,8,7,6,5,4,3,2,1,2,3,4,5,6,7,8,9,10)
+X <- c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19)
+```{r}
+some_data<-data.frame(X_iv=X, Y_dv=Y)
+
+library(ggplot2)
+
+ggplot(some_data, aes(x=X_iv, y=Y_dv))+
+  geom_point()+
+  geom_smooth(method='lm', se=FALSE)
+```
+Looking at the scatterplot, it appears 
