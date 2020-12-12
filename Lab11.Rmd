@@ -21,13 +21,15 @@ results$p.value
 B. Use a permutation test to create a null-distribution, and report the p-value for getting the observed correlation or larger using your simulated null-distribution. (2 points)
 ```{r}
 sim_rs <- replicate(1000,cor(sample(X),sample(Y)))
-length(sim_rs[sim_rs <= results$estimate])/1000
+hist(sim_rs)
+
+length(sim_rs[sim_rs >= results$estimate])/1000
 ```
 2. Using the variables X and Y above, and assuming that the values could be re-ordered in any way, report the following:
 
 A. the smallest possible sum of cross-products (1 point)
 ```{r}
-sim_sums <- replicate(1000,sum(sample(1:10)*sample(1:10)))
+sim_sums <- replicate(1000,sum(sample(X)*sample(Y)))
 min(sim_sums)
 ```
 
